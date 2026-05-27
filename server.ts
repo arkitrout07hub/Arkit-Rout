@@ -72,11 +72,14 @@ app.post("/api/chat", async (req, res) => {
     });
 
     // Run generateContent calling 'gemini-3.5-flash' for chatbot task
+    const baseInstruction = systemInstruction || "You are a helpful, friendly, and intelligent AI companion.";
+    const concisenessDirective = "\n\nCRITICAL RESPONSIVENESS INSTRUCTION:\n- Keep simple, direct, or factual questions (e.g., \"1+1\", greetings, math equations, capital cities, brief facts) highly concise, brief, and straight-to-the-point with zero extra fluff, preamble, or verbose explanation (e.g. \"1 + 1 = 2\" or just \"2\").\n- Only provide longer, analytical, or rich creative text when the user asks a deep, complex, or philosophical open-ended inquiry.";
+
     const response = await ai.models.generateContent({
       model: "gemini-3.5-flash",
       contents: formattedContents,
       config: {
-        systemInstruction: systemInstruction || "You are a helpful, friendly, and intelligent AI companion.",
+        systemInstruction: baseInstruction + concisenessDirective,
         temperature: typeof temperature === "number" ? temperature : 0.7,
       }
     });
