@@ -1,0 +1,6 @@
+{
+  "name": "Simple Chatbot",
+  "description": "An interactive chatbot interface where you can ask general queries and converse with Google Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
